@@ -7,6 +7,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Pickaxe } from "lucide-react"
 
+interface ExpeditionCardProps {
+  resourceType: "food" | "dirt" | "wood" | "leaves"
+  onStartExpedition: (resourceType: "food" | "dirt" | "wood" | "leaves", antsCount: number) => void
+  availableAnts: number
+}
+
 const RESOURCE_INFO = {
   food: {
     icon: "🍯",

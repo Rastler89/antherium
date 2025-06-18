@@ -9,32 +9,85 @@ import { Progress } from "@/components/ui/progress"
 import { Crown, Bug, Egg, Baby, Home, TreePine, Beaker, Users } from "lucide-react"
 import ExpeditionCard from "./expedition-card"
 import TechnologyTree, { TECHNOLOGIES } from "./technology-tree"
-import ChamberUpgrade, { CHAMBER_COSTS } from "./chamber-upgrade"
+import ChamberUpgrade, { CHAMBER_COSTS, type Chamber } from "./chamber-upgrade"
 import ConstructionRequirements from "./construction-requirements"
 import GameTutorialModal from "./game-tutorial-modal"
-import AntManagement from "./ant-management"
+import AntManagement, { type Ant } from "./ant-management"
 import SaveLoadModal from "./save-load-modal"
 import { GameStorage } from "./game-storage"
 import { CHAMBER_INFO } from "./chamber-upgrade"
 import GameSettingsModal, {
+  type GameSettings,
   loadGameSettings,
   saveGameSettings,
   DEFAULT_SETTINGS,
 } from "./game-settings"
 import KeyboardShortcutsModal, {
+  type KeyboardShortcuts,
   useKeyboardShortcuts,
   loadKeyboardShortcuts,
   saveKeyboardShortcuts,
   DEFAULT_SHORTCUTS,
 } from "./keyboard-shortcuts"
 import NotificationSystem, { useNotifications, createGameNotifications } from "./notification-system"
-import { useSoundSystem, useSoundConfig, DEFAULT_SOUND_CONFIG } from "./sound-system"
-import RandomEventModal, { useRandomEventSystem, ActiveEventsDisplay } from "./random-events-system"
-import GameSettings from "@/interfaces/GameSettings"
-import GameState from "@/interfaces/GameState"
-import KeyboardShortcuts from "@/interfaces/KeyboardShortcuts"
-import SoundConfig from "@/interfaces/SoundConfig"
-import { RandomEvent } from "@/interfaces/RandomEvent"
+import { useSoundSystem, useSoundConfig, type SoundConfig, DEFAULT_SOUND_CONFIG } from "./sound-system"
+import RandomEventModal, { useRandomEventSystem, ActiveEventsDisplay, type RandomEvent } from "./random-events-system"
+
+interface Expedition {
+  id: string
+  type: "food" | "dirt" | "wood" | "leaves"
+  antsCount: number
+  startTime: number
+  endTime: number
+  location: string
+}
+
+interface GameState {
+  queen: {
+    id: string
+    nextEggTime: number
+  }
+  eggs: Array<{
+    id: string
+    hatchTime: number
+  }>
+  larvae: Array<{
+    id: string
+    evolveTime: number
+  }>
+  ants: Array<Ant>
+  resources: {
+    food: number
+    dirt: number
+    wood: number
+    leaves: number
+  }
+  chambers: Array<Chamber & { assignedAnts: string[] }>
+  currentTime: number
+  expeditions: Array<Expedition>
+  researchedTechs: string[]
+  currentResearch: { techId: string; startTime: number; endTime: number } | null
+  storageCapacity: {
+    food: number
+    dirt: number
+    wood: number
+    leaves: number
+  }
+  lastMushroomProduction: number
+  // Nuevos campos para tracking de notificaciones
+  lastEggCount: number
+  lastLarvaeCount: number
+  lastAntsCount: number
+  achievementsUnlocked: string[]
+  // Nuevos campos para eventos aleatorios
+  eventEffects: {
+    resourceMultiplier: { food: number; dirt: number; wood: number; leaves: number }
+    expeditionBonus: number
+    constructionBonus: number
+    researchBonus: number
+    populationBonus: number
+  }
+}
 
 const getTimers = (settings: GameSettings, eventEffects?: any) => {
   const speedMultiplier = settings.gameSpeed

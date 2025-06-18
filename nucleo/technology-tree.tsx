@@ -8,6 +8,27 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Clock, Zap, Users, Building, Beaker } from "lucide-react"
 
+export interface Technology {
+  id: string
+  name: string
+  description: string
+  category: "biology" | "engineering" | "exploration" | "military"
+  cost: { food: number; dirt: number; wood: number }
+  researchTime: number
+  prerequisites: string[]
+  effects: {
+    eggLayingSpeedBonus?: number
+    hatchingSpeedBonus?: number
+    evolutionSpeedBonus?: number
+    explorationSpeedBonus?: number
+    explorationEfficiencyBonus?: number
+    maxPopulationBonus?: number
+    newUnits?: string[]
+    newBuildings?: string[]
+    maxNurseriesBonus?: number
+  }
+}
+
 export const TECHNOLOGIES: Record<string, Technology> = {
   // Biología
   fertilityBoost: {
@@ -102,6 +123,15 @@ export const TECHNOLOGIES: Record<string, Technology> = {
     prerequisites: ["rapidDevelopment"],
     effects: { maxNurseriesBonus: 2 }, // Aumenta el límite a 3
   },
+}
+
+interface TechnologyTreeProps {
+  researchedTechs: string[]
+  currentResearch: { techId: string; startTime: number; endTime: number } | null
+  resources: { food: number; dirt: number; wood: number }
+  onStartResearch: (techId: string) => void
+  currentTime: number
+  hasGranary: boolean // Nueva prop para saber si tiene granero
 }
 
 export default function TechnologyTree({

@@ -4,6 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, CheckCircle } from "lucide-react"
 import { CHAMBER_INFO, type Chamber } from "./chamber-upgrade"
 
+interface ConstructionRequirementsProps {
+  chamberType: keyof typeof CHAMBER_INFO
+  chambers: Chamber[]
+  royalLevel: number
+  researchedTechs: string[]
+}
+
 export default function ConstructionRequirements({
   chamberType,
   chambers,

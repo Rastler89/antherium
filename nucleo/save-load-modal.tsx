@@ -15,7 +15,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Save, Upload, Download, Trash2 } from "lucide-react"
 import { GameStorage } from "./game-storage"
 
-
+interface SaveLoadModalProps {
+  onLoadGame: () => void
+  onNewGame: () => void
+}
 
 export default function SaveLoadModal({ onLoadGame, onNewGame }: SaveLoadModalProps) {
   const [open, setOpen] = useState(false)

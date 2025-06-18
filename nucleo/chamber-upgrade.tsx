@@ -6,6 +6,23 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowUp, Plus } from "lucide-react"
 import { Crown } from "lucide-react"
 
+export interface Chamber {
+  id: string
+  type:
+    | "royal"
+    | "nursery"
+    | "storage"
+    | "barracks"
+    | "laboratory"
+    | "warehouse"
+    | "granary"
+    | "dining"
+    | "mushroom_farm"
+  level: number
+  tunnels: number // Número de túneles que tiene esta cámara
+  connectedChambers: string[] // IDs de cámaras conectadas a través de túneles
+}
+
 export const CHAMBER_INFO = {
   royal: {
     name: "Cámara Real",
@@ -134,6 +151,15 @@ export const CHAMBER_COSTS = {
       ants: Math.floor(baseCost.ants * (chamberType === "royal" ? level * 2 : level * 1.2)),
     }
   },
+}
+
+interface ChamberUpgradeProps {
+  chamber: Chamber
+  resources: { food: number; dirt: number; wood: number; leaves: number }
+  availableAnts: number
+  onUpgrade: (chamberId: string) => void
+  onAddTunnel: (chamberId: string) => void
+  royalLevel: number
 }
 
 export default function ChamberUpgrade({

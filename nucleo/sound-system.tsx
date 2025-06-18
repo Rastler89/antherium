@@ -2,6 +2,20 @@
 
 import { useEffect, useRef, useCallback } from "react"
 
+export interface SoundConfig {
+  volume: number // 0-1
+  enabled: boolean
+  categories: {
+    notifications: boolean
+    population: boolean
+    construction: boolean
+    research: boolean
+    expeditions: boolean
+    achievements: boolean
+    ui: boolean
+  }
+}
+
 export const DEFAULT_SOUND_CONFIG: SoundConfig = {
   volume: 0.7,
   enabled: true,
@@ -78,6 +92,11 @@ const SOUND_DEFINITIONS = {
 }
 
 export type SoundName = keyof typeof SOUND_DEFINITIONS
+
+interface SoundSystemProps {
+  config: SoundConfig
+  onConfigChange?: (config: SoundConfig) => void
+}
 
 export const useSoundSystem = (config: SoundConfig) => {
   const audioContextRef = useRef<AudioContext | null>(null)

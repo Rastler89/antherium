@@ -9,6 +9,31 @@ import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Bug, Users, Sword, Sprout, Baby } from "lucide-react"
 
+export interface Ant {
+  id: string
+  type: "worker" | "soldier" | "cultivator"
+  status: "idle" | "working" | "building" | "assigned"
+  assignment?: string // ID de la cámara asignada
+  experience: number
+}
+
+export interface Chamber {
+  id: string
+  type: string
+  level: number
+  assignedAnts: string[] // IDs de hormigas asignadas
+}
+
+interface AntManagementProps {
+  ants: Ant[]
+  chambers: Chamber[]
+  larvae: Array<{ id: string; evolveTime: number }>
+  currentTime: number
+  researchedTechs: string[]
+  onEvolveToType: (larvaId: string, antType: "worker" | "soldier" | "cultivator") => void
+  onAssignAnt: (antId: string, chamberId: string | null) => void
+}
+
 const ANT_INFO = {
   worker: {
     name: "Obrera",

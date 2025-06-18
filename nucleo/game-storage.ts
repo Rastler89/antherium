@@ -1,5 +1,59 @@
 "\"use client"
 
+interface GameSaveData {
+  queen: {
+    id: string
+    nextEggTime: number
+  }
+  eggs: Array<{
+    id: string
+    hatchTime: number
+  }>
+  larvae: Array<{
+    id: string
+    evolveTime: number
+  }>
+  ants: Array<{
+    id: string
+    type: "worker" | "soldier" | "cultivator"
+    status: "idle" | "working" | "building" | "assigned"
+    assignment?: string
+    experience: number
+  }>
+  resources: {
+    food: number
+    dirt: number
+    wood: number
+    leaves: number
+  }
+  chambers: Array<{
+    id: string
+    type: string
+    level: number
+    tunnels: number
+    connectedChambers: string[]
+    assignedAnts: string[]
+  }>
+  expeditions: Array<{
+    id: string
+    type: "food" | "dirt" | "wood" | "leaves"
+    antsCount: number
+    startTime: number
+    endTime: number
+    location: string
+  }>
+  researchedTechs: string[]
+  currentResearch: { techId: string; startTime: number; endTime: number } | null
+  storageCapacity: {
+    food: number
+    dirt: number
+    wood: number
+    leaves: number
+  }
+  lastMushroomProduction: number
+  lastSaveTime: number
+}
+
 const SAVE_KEY = "ant-strategy-game-save"
 export const AUTO_SAVE_INTERVAL = 30000 // 30 segundos
 

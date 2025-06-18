@@ -18,6 +18,40 @@ import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Keyboard, Zap, Home, TreePine, Users, Settings } from "lucide-react"
 
+export interface KeyboardShortcuts {
+  // Navegación
+  switchToAnthill: string
+  switchToAnts: string
+  switchToOutside: string
+  switchToTechnology: string
+
+  // Acciones rápidas
+  quickSave: string
+  openSettings: string
+  openTutorial: string
+
+  // Construcción
+  buildNursery: string
+  buildLaboratory: string
+  buildWarehouse: string
+  buildGranary: string
+
+  // Expediciones
+  sendFoodExpedition: string
+  sendDirtExpedition: string
+  sendWoodExpedition: string
+  sendLeavesExpedition: string
+
+  // Gestión de hormigas
+  evolveAllToWorkers: string
+  evolveAllToSoldiers: string
+  evolveAllToCultivators: string
+
+  // Cámaras
+  upgradeRoyalChamber: string
+  upgradeAllNurseries: string
+}
+
 const DEFAULT_SHORTCUTS: KeyboardShortcuts = {
   // Navegación (1-4)
   switchToAnthill: "1",
@@ -121,6 +155,11 @@ const SHORTCUT_CATEGORIES = {
       { key: "upgradeAllNurseries", name: "Mejorar Guarderías", description: "Mejora todas las guarderías posibles" },
     ],
   },
+}
+
+interface KeyboardShortcutsModalProps {
+  shortcuts: KeyboardShortcuts
+  onShortcutsChange: (shortcuts: KeyboardShortcuts) => void
 }
 
 export default function KeyboardShortcutsModal({ shortcuts, onShortcutsChange }: KeyboardShortcutsModalProps) {

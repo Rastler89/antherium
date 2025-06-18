@@ -18,6 +18,18 @@ import { Badge } from "@/components/ui/badge"
 import { Settings, Save, Volume2, VolumeX, Zap, Clock } from "lucide-react"
 import SoundSystemConfig, { type SoundConfig, DEFAULT_SOUND_CONFIG } from "./sound-system"
 
+export interface GameSettings {
+  autoSaveEnabled: boolean
+  autoSaveInterval: number // en segundos
+  gameSpeed: number // multiplicador de velocidad (0.5x, 1x, 1.5x, 2x)
+  soundEnabled: boolean
+  notificationsEnabled: boolean
+  showDetailedStats: boolean
+  compactUI: boolean
+  autoEvolutionDelay: number // tiempo extra antes de evolución automática en minutos
+  soundConfig: SoundConfig // Nueva configuración de sonidos
+}
+
 const DEFAULT_SETTINGS: GameSettings = {
   autoSaveEnabled: true,
   autoSaveInterval: 30, // 30 segundos
@@ -52,6 +64,11 @@ const EVOLUTION_DELAYS = [
   { value: 5, label: "5 minutos", description: "Más tiempo" },
   { value: 10, label: "10 minutos", description: "Mucho tiempo" },
 ]
+
+interface GameSettingsModalProps {
+  settings: GameSettings
+  onSettingsChange: (settings: GameSettings) => void
+}
 
 export default function GameSettingsModal({ settings, onSettingsChange }: GameSettingsModalProps) {
   const [open, setOpen] = useState(false)

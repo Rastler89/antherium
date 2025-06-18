@@ -8,6 +8,34 @@ import { Progress } from "@/components/ui/progress"
 import { Bell, X, Crown, Bug, TreePine, Beaker, AlertTriangle, CheckCircle, Info, Home } from "lucide-react"
 import { useSoundSystem, type SoundConfig } from "./sound-system"
 
+export interface GameNotification {
+  id: string
+  type: "success" | "warning" | "info" | "error" | "achievement"
+  category: "population" | "resources" | "construction" | "research" | "expedition" | "system" | "achievement"
+  title: string
+  message: string
+  timestamp: number
+  duration?: number // en ms, undefined = permanente hasta que se cierre
+  icon?: string
+  progress?: number // 0-100 para notificaciones con progreso
+  actions?: Array<{
+    label: string
+    action: () => void
+    variant?: "default" | "outline" | "destructive"
+  }>
+  data?: any // datos adicionales para la notificación
+}
+
+interface NotificationSystemProps {
+  notifications: GameNotification[]
+  onDismiss: (id: string) => void
+  onDismissAll: () => void
+  maxVisible?: number
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left"
+  showHistory?: boolean
+  soundConfig?: SoundConfig // Nueva prop
+}
+
 const NOTIFICATION_ICONS = {
   success: CheckCircle,
   warning: AlertTriangle,

@@ -8,6 +8,46 @@ import { Progress } from "@/components/ui/progress"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Zap, CloudRain, AlertTriangle, Gift, Sparkles, Heart } from "lucide-react"
 
+export interface RandomEvent {
+  id: string
+  type: "positive" | "negative" | "neutral" | "choice"
+  category: "weather" | "discovery" | "visitor" | "disaster" | "opportunity" | "mystery"
+  title: string
+  description: string
+  icon: string
+  rarity: "common" | "uncommon" | "rare" | "legendary"
+  duration?: number // en ms, para eventos temporales
+  effects: {
+    immediate?: {
+      resources?: { food?: number; dirt?: number; wood?: number; leaves?: number }
+      population?: { eggs?: number; larvae?: number; ants?: number }
+      chambers?: { damage?: number; boost?: number }
+    }
+    temporary?: {
+      duration: number // en ms
+      resourceMultiplier?: { food?: number; dirt?: number; wood?: number; leaves?: number }
+      expeditionBonus?: number
+      constructionBonus?: number
+      researchBonus?: number
+      populationBonus?: number
+    }
+    choices?: Array<{
+      id: string
+      text: string
+      effects: RandomEvent["effects"]["immediate"]
+      consequences?: string
+    }>
+  }
+  requirements?: {
+    minAnts?: number
+    minChambers?: number
+    hasResearch?: string[]
+    minResources?: { food?: number; dirt?: number; wood?: number; leaves?: number }
+  }
+  cooldown?: number // tiempo antes de que pueda volver a aparecer
+  onlyOnce?: boolean // evento único
+}
+
 export const RANDOM_EVENTS: Record<string, RandomEvent> = {
   // Eventos de Clima
   heavyRain: {
@@ -417,6 +457,20 @@ export const RANDOM_EVENTS: Record<string, RandomEvent> = {
     },
     cooldown: 60 * 60 * 1000, // 1 hora
   },
+}
+
+interface RandomEventSystemProps {
+  gameState: any
+  onEventTriggered: (event: RandomEvent, choice?: string) => void
+  currentTime: number
+  gameSettings: any
+}
+
+interface ActiveEvent {
+  event: RandomEvent
+  startTime: number
+  endTime?: number
+  choice?: string
 }
 
 export const useRandomEventSystem = () => {
