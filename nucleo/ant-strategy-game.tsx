@@ -1041,7 +1041,7 @@ export default function AntStrategyGame() {
       <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100 flex items-center justify-center">
         <div className="text-center">
           <div className="text-4xl mb-4">🐜</div>
-          <div className="text-lg">Cargando Reino de las Hormigas...</div>
+          <div className="text-lg">Cargando Antherium...</div>
         </div>
       </div>
     )
@@ -1077,7 +1077,7 @@ export default function AntStrategyGame() {
 
       <div className="max-w-6xl mx-auto">
         <header className="text-center mb-6">
-          <h1 className="text-4xl font-bold text-amber-900 mb-2">🐜 Reino de las Hormigas</h1>
+          <h1 className="text-4xl font-bold text-amber-900 mb-2">🐜 Antherium</h1>
           <p className="text-amber-700">Construye tu imperio subterráneo</p>
           <div className="text-xs text-muted-foreground mt-2">
             Presiona las teclas 1-4 para navegar | H para ayuda | S para guardar

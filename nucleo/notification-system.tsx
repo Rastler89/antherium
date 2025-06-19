@@ -462,6 +462,18 @@ export const createGameNotifications = (
     })
   },
 
+  gameLoaded: () => {
+    soundSystem?.playSystemSound("load")
+    return addNotification({
+      type: "info",
+      category: "system",
+      title: "Juego Cargado",
+      message: "Tu partida ha sido cargada correctamente",
+      icon: "📂",
+      duration: 2000,
+    })
+  },
+
   // Continuar con el resto de notificaciones agregando los sonidos correspondientes...
 
   constructionCompleted: (chamberType: string) => {

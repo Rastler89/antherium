@@ -60,7 +60,7 @@ const DEFAULT_SHORTCUTS: KeyboardShortcuts = {
   switchToTechnology: "4",
 
   // Acciones rápidas
-  quickSave: "s",
+  quickSave: "shift+s",
   openSettings: "c", // configuración
   openTutorial: "h", // help
 
