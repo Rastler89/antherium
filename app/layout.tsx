@@ -1,23 +1,25 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { GameProvider } from "@/context/GameContext";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Antherium',
-  description: 'Ten tu hormiguero digital',
-}
+  title: "Antherium Rebuilt",
+  description: "An ant colony strategy game, rebuilt.",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang='es'>
-      <head>
-  <link href="/dist/styles.css" rel="stylesheet" />
-
-      </head>
-      <body>{children}</body>
+    <html lang="en">
+      <body className={inter.className}>
+        <GameProvider>{children}</GameProvider>
+      </body>
     </html>
-  )
+  );
 }

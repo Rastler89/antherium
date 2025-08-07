@@ -1,9 +1,9 @@
-"use client"
+import GameUI from "@/components/GameUI";
 
-import AntStrategyGame from "@/nucleo/ant-strategy-game";
-
-const Page = () => {
-  return <AntStrategyGame />
+export default function Home() {
+  return (
+    <main>
+      <GameUI />
+    </main>
+  );
 }
-
-export default Page;
