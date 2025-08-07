@@ -1,6 +1,6 @@
-# 🐜 Antherium Rebuilt
+# 🐜 Antherium
 
-Welcome to Antherium Rebuilt, an idle strategy game where you manage and grow a burgeoning ant colony. This project is a complete reconstruction of the original Antherium game, focusing on a more robust, scalable, and well-documented architecture.
+Welcome to Antherium, an idle strategy game where you manage and grow a burgeoning ant colony.
 
 ## How to Play
 
